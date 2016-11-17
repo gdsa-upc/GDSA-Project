@@ -1,2 +1,0 @@
-# GDSA-Project
-Projecte GDSA
