@@ -108,13 +108,51 @@
 <ul>
 <li><p><a href="https://www.enthought.com/products/canopy/">Canopy</a>: Entorn d'anàlisi de Python integral que proporciona més de 450 paquets de Python.</p></li>
 <li><p><a href="https://atom.io">Atom</a>: Editor de text de software lliure en el que es pot treballar còmodament amb diferents idiomes de programació. Disposa de molts paquets descarregables que amplien les seves funcions com ara compiladors o personalitzadors. </p></li>
-<li><p>Instal·lació d'entorns de desenvolupament local</p></li>
-<li><p>Configuració dels comptes de GitHub per part de tots els membres del grup</p></li>
-<li><p>Creació d'un repositori de l'equip</p></li>
-<li><p>La creació d'aquesta pàgina web</p></li>
-<li><p>El desenvolupament del primer script</p></li>
-<li><p>Anàlisis del resultat del primer script mitjançant jupyter</p></li>
 </ul>
+
+<p>Amb aquestes dos entorns s'ha genera el primer script. Aquest es basa en l'extracció de punts d'interès d'una imatges. S'ha fet de dos maneres diferents, SURF i SIFT:</p>
+
+<ol>
+<li>SURFT</li>
+</ol>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
+<span class="pl-k">import</span> cv2
+<span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt
+
+
+img <span class="pl-k">=</span> cv2.imread(<span class="pl-s"><span class="pl-pds">'</span>//Users/Marta/Desktop/fotos escriptori/TIGRE.JPG<span class="pl-pds">'</span></span>,<span class="pl-c1">0</span>)
+surf <span class="pl-k">=</span> cv2.SURF(<span class="pl-c1">4000</span>)
+kp, des <span class="pl-k">=</span> surf.detectAndCompute(img, <span class="pl-c1">None</span>)
+img2 <span class="pl-k">=</span> cv2.drawKeypoints(img, kp, <span class="pl-c1">None</span>, (<span class="pl-c1">255</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>), <span class="pl-c1">4</span>)
+plt.imshow(img2),plt.show()
+<span class="pl-c1">print</span> <span class="pl-c1">len</span>(kp)</pre></div>
+
+<p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/figure_1.png?raw=true" alt=""></p>
+
+<p>Utilitzant SURFT podem observar que ens detalla els contorns més pronunciats de la imatge.</p>
+
+<ol>
+<li>SIFT</li>
+</ol>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
+<span class="pl-k">import</span> cv2
+<span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt
+
+
+img <span class="pl-k">=</span> cv2.imread(<span class="pl-s"><span class="pl-pds">'</span>//Users/Marta/Desktop/fotos escriptori/TIGRE.JPG<span class="pl-pds">'</span></span>,<span class="pl-c1">0</span>)
+sift <span class="pl-k">=</span> cv2.SIFT(<span class="pl-c1">4000</span>)
+kp, des <span class="pl-k">=</span> sift.detectAndCompute(img, <span class="pl-c1">None</span>)
+img2 <span class="pl-k">=</span> cv2.drawKeypoints(img, kp, <span class="pl-c1">None</span>, (<span class="pl-c1">255</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>), <span class="pl-c1">4</span>)
+plt.imshow(img2),plt.show()
+<span class="pl-c1">print</span> <span class="pl-c1">len</span>(kp)</pre></div>
+
+<p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/Imagen%201.png?raw=true" alt=""></p>
+
+<p>En aquest cas com veiem a la imatge anterior, el resultat de l'extracció de característiques és més detallat. Sobretot en els canvis d'intensitat, és a dir, en els contorns.</p>
+
+<p>Les proves d'aquest primer script també s'han realitzat a <a href="http://jupyter.org">Jupyter</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
