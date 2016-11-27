@@ -74,7 +74,8 @@
 </table>
 
 <h1>
-<a id="sessió-3" class="anchor" href="#sessi%C3%B3-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sessió 3</h1>
+<a id="sessió-3" class="anchor" href="#sessi%C3%B3-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://docs.google.com/presentation/d/10qN_5L64CRrDN-KxAChikhTSHKhgo5Zdgb-cuL4wFAA/edit?usp=sharing">Sessió 3</a>
+</h1>
 
 <p>En aquesta primera part del projecta s'ha realitzat una <a href="https://drive.google.com/file/d/0BwPBlegi0csQamhIU3YyT1o3ZGs/view?usp=sharing">Base de Dades</a> amb 150 imatges diferents. Majoritàriament trobem imatges del Museu de la Ciència i la Tecnologia de Terrassa, del Mercat de la Independència. Encara així, en la base de dades també hi han imatges d'edificis desconeguts. Totes aquestes fotografies serviran d'entrenament al sistema. </p>
 
@@ -110,7 +111,7 @@
 <li><p><a href="https://atom.io">Atom</a>: Editor de text de software lliure en el que es pot treballar còmodament amb diferents idiomes de programació. Disposa de molts paquets descarregables que amplien les seves funcions com ara compiladors o personalitzadors. </p></li>
 </ul>
 
-<p>Amb aquestes dos entorns s'ha genera el primer script. Aquest es basa en l'extracció de punts d'interès d'una imatges. S'ha fet de dos maneres diferents, SURF i SIFT:</p>
+<p>Amb aquestes dos entorns s'ha genera el primer script. Aquest es basa en l'extracció de punts d'interès d'una imatges. S'ha fet de dos extractors de característiques diferents, SURF i SIFT. A continuació podeu veure els codis realitzats agafant d'exemple una imatge d'un tigre:</p>
 
 <ol>
 <li>SURFT</li>
@@ -152,7 +153,35 @@ plt.imshow(img2),plt.show()
 
 <p>En aquest cas com veiem a la imatge anterior, el resultat de l'extracció de característiques és més detallat. Sobretot en els canvis d'intensitat, és a dir, en els contorns.</p>
 
-<p>Les proves d'aquest primer script també s'han realitzat a <a href="http://jupyter.org">Jupyter</a></p>
+<p>Les proves d'aquest primer script també s'han realitzat a <a href="http://jupyter.org">Jupyter</a>. Podeu veure tot el codi realitzat a <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tree/master/1--Keypoints">GitHub</a>.</p>
+
+<h1>
+<a id="sessió-4" class="anchor" href="#sessi%C3%B3-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">Sessió 4</a>
+</h1>
+
+<p>L'estructura per blocs d'aquesta sessió seria:</p>
+
+<p>En aquesta part del projecta la intenció es extreure les característiques de les imatges que formen part de la nostra <a href="https://drive.google.com/file/d/0BwPBlegi0csQamhIU3YyT1o3ZGs/view?usp=sharing">Base de Dades</a>. L'extractor ens retorna un vector de característiques per cada punt d'interès. </p>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-c"># -*- coding: utf-8 -*-</span>
+<span class="pl-k">import</span> os 
+
+<span class="pl-k">def</span> <span class="pl-en">build_database</span> (<span class="pl-smi">indir</span>,<span class="pl-smi">outdir</span>): <span class="pl-c">#definim la funció</span>
+    images <span class="pl-k">=</span> os.listdir(indir)  <span class="pl-c">#llegeixo tots els noms dels fitxers del directori d'entrada i els guarda a imatges</span>
+    outfile <span class="pl-k">=</span> <span class="pl-c1">open</span>(outdir<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/ID.txt<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>w<span class="pl-pds">'</span></span>)   <span class="pl-c">#crea el fitxer on escriu els id.</span>
+    <span class="pl-k">for</span> <span class="pl-v">file</span> <span class="pl-k">in</span> images: <span class="pl-c">#recorre tots els id i els escriu al fitxer</span>
+        outfile.write(<span class="pl-v">file</span>[<span class="pl-c1">0</span>:<span class="pl-k">-</span><span class="pl-c1">4</span>]<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>) 
+        <span class="pl-c1">print</span>(<span class="pl-v">file</span>)
+    outfile.close()<span class="pl-c">#tanca el fitxer</span>
+
+
+ruta1<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/val/images<span class="pl-pds">'</span></span>
+ruta2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/train/images<span class="pl-pds">'</span></span>
+savepath1<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/val<span class="pl-pds">'</span></span>
+savepath2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/train<span class="pl-pds">'</span></span>
+
+build_database(ruta1,savepath1)
+build_database(ruta2,savepath2)</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
