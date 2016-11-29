@@ -3,34 +3,31 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
     <title>Terrassa’s Buildings by gdsa-upc</title>
   </head>
 
   <body>
-    <div id="container">
+    <header>
       <div class="inner">
+        <h1>Terrassa’s Buildings</h1>
+        <h2>Projecte GDSA</h2>
+        <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-        <header>
-          <h1>Terrassa’s Buildings</h1>
-          <h2>Projecte GDSA</h2>
-        </header>
-
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
           <p>Aquesta web neix a partir de l'assignatura Gestió i Distribució de Senyals Audiovisuals, on es planteja el desenvolupament d'un projecte que es basa en la cerca visual. Aquest projecte l'hem donat com a nom Terrassa's Buildings i els seus desenvolupadors són:</p>
 
 <table>
@@ -191,14 +188,14 @@ plt.imshow(img2),plt.show()</pre></div>
 <p>Les proves d'aquest primer script també s'han realitzat a <a href="http://jupyter.org">Jupyter</a>. Podeu veure tot el codi realitzat a <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tree/master/1--Keypoints">GitHub</a>.</p>
 
 <h1>
-<a id="sessió-4" class="anchor" href="#sessi%C3%B3-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/gh-pages/images/Captura%20de%20pantalla%202016-11-29%20a%20les%2022.03.21.png?raw=true">Sessió 4</a>
+<a id="sessió-4" class="anchor" href="#sessi%C3%B3-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">Sessió 4</a>
 </h1>
 
-<p>La primera part d'aquesta sessió seria:</p>
+<p>Aquesta sessió està formada pels següents blocs:</p>
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/gh-pages/images/Captura%20de%20pantalla%202016-11-29%20a%20les%2022.03.21.png?raw=true" alt=""></p>
 
-<p>En concret, en aquesta part del projecte la intenció es extreure les característiques de les imatges que formen part de la nostra <a href="https://drive.google.com/file/d/0BwPBlegi0csQamhIU3YyT1o3ZGs/view?usp=sharing">Base de Dades</a>. L'extractor ens retorna un vector de característiques per cada punt d'interès. </p>
+<p>En el primer bloc, la intenció es genera una base de dades. La funció s'anomena build_database i el resultat és el que es mostra a continuació:</p>
 
 <div class="highlight highlight-source-python"><pre><span class="pl-c"># -*- coding: utf-8 -*-</span>
 <span class="pl-k">import</span> os 
@@ -219,15 +216,35 @@ savepath2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class=
 
 build_database(ruta1,savepath1)
 build_database(ruta2,savepath2)</pre></div>
+
+<p>Un cop ja tenim això, el següent pas és fer el Feature Extraction. Aquesta part està formada pels següents funcions:</p>
+
+<ul>
+<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/Marta-B/sessio-4/Feature-Extraction/get_local_features.py">Get_Local_Featrures</a></li>
+<li>
+<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Train_codebook.py">Train_codebook</a> </li>
+<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Get_assignments.py">Get_assignments</a></li>
+<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/build_bow.py">Build_bow</a></li>
+</ul>
         </section>
 
-        <footer>
-          Terrassa’s Buildings is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a><br>
-          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+        <aside id="sidebar">
+          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        
+          <p class="repo-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings"></a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
       </div>
     </div>
+
+  
   </body>
 </html>
