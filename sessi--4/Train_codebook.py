@@ -1,8 +1,8 @@
 from sklearn.cluster import MiniBatchKMeans
 
-def train_codebook(n_clusters,descriptors,paraules):
-    kMeans = MiniBatchKMeans(paraules)
-    #Entrenem el KMeans
-    kMeans.fit(descriptores)
-    return km
+def train_codebook(params,descriptors,paraules):
+    kMeans = MiniBatchKMeans(params['descriptor_size'])
+    #Entrenem el KMeans amb els descriptors
+    kMeans.fit(descriptors)
+    return kMeans
     
