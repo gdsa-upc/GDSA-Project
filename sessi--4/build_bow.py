@@ -10,5 +10,5 @@ def bow(assignments,kMeans):
     for a in assignments:
         descriptor[a] += 1
     # És important normalitzar amb L2 
-    descriptor = preprocessing.normalize(descriptor)[0]
+    descriptor = preprocessing.normalize(descriptor)
     return descriptor
