@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+#funció que codifica els descriptors obtinguts en la local_feature_extraction i els assigna el centroid més pròxim
+#que determinarà el cluster al que es troba el descriptor en la funció get_assignments. 
 from sklearn.cluster import MiniBatchKMeans
 
 def train_codebook(params,descriptors,paraules):
     kMeans = MiniBatchKMeans(params['descriptor_size'])
-    #Entrenem el KMeans amb els descriptors
-    kMeans.fit(descriptors) #funció que calcula els centroids agrupant-los en mini lots.
+    #fit() funció que calcula els centroids agrupant-los en mini lots. Defineix els centroids amb un entrenament segons els descriptors
+    #i el numero de clusters (paraules) que volem.
+    kMeans.fit(descriptors) 
     return kMeans
     
