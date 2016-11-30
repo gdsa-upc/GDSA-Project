@@ -6,6 +6,7 @@ from local_feature_extraction import local_feature_extraction
 from train_codebook import train_codebook
 from get_assignments import get_assignments
 from build_bow import build_bow
+from get_params import get_params
 
 def get_features(params):
     #-------- Imatges d'entrenament --------#
@@ -19,7 +20,7 @@ def get_features(params):
     nom=str(ID.readline()).replace('\n','')
     #invoquem la funciṕ local_feature_extraction per la primera imatge que hem llegit guardada a "nom".
     #Amb os.path.join() obtenim la imatge del directori.
-    des_train=local_feature_extraction(params,os.path.join(params['root'],params['database'],'train','images',nom + '.jpg'))
+    des_train=local_feature_extraction(params,nom)
     #Creem un diccionary amb la funció dic() on i guardarem els descriptors per a cada imatge.
     # A diferència de les seqüències que estan indexades per un rang de numeros,els diccionaris són com matrius que estàn
     #indexats per keys les quals poden ser de qualsevol tipus immutable: strings i numeros poden ser sempre keys.
@@ -29,7 +30,7 @@ def get_features(params):
     #Generem un bucle per fer el mateix amb la resta d'imatges d'entrenament.
     for line in ID:
         nom=str(line).replace('\n','')
-        x=local_feature_extraction(params,os.path.join(params['root'],params['database'],'train','images',nom + '.jpg'))
+        x=local_feature_extraction(params,nom)
         #Creem un vector que contindrà tots els descriptors
         des_train=np.concatenate((des_train,x))
         #Per a cada imatge tindrem a la matriu els seus descriptors.
@@ -39,7 +40,7 @@ def get_features(params):
 
     #Calculem els centroids "entrenant" la funció KMeans amb el numero de clusters(paraules) que volem i amb els descriptors
     #de les imatges d'entrenament.
-    clusters=1024
+    clusters=100
     codebook=train_codebook(params,des_train,clusters) #des_train conté tots els descriptors de cada imatge concatenats
     #Obrim el fitxer que conte les ID de les imatges d'entrenament per poder llegirlo altre cop des de l'inici:
     ID=open(os.path.join(params['root'],params['database'],'train','ID.txt'), 'r')
@@ -68,13 +69,13 @@ def get_features(params):
     #Obrim el fitxer que conté les ID de les imatges de validacio
     ID = open(os.path.join(params['root'],params['database'],'val','ID.txt'), 'r')
     nom=str(ID.readline()).replace('\n','')
-    des_val=local_feature_extraction(params,os.path.join(params['root'],params['database'],'val','images',nom + '.jpg'))
+    des_val=local_feature_extraction(params,nom)
     #Creacio del diccionari de les imatges de validacio
     dic_val=dict()
     dic_val[nom]=des_val
     for line in ID:
         #Extraccio de les caracteristiques (keypoints) per a les imatges de validacio
-        x=local_feature_extraction(params,os.path.join(params['root'],params['database'],'val','images',str(line).replace('\n','') + '.jpg'))
+        x=local_feature_extraction(params,nom)
         dic_val=np.concatenate((des_val,x)) #Creem un vector que contè tots els descriptors
         #Omplim el diccionari amb els descriptors per cada imatge.
         dic_val[str(line).replace('\n','')]=x
@@ -101,3 +102,7 @@ def get_features(params):
     bow_val = open (os.path.join(params['root'],params['database'],'val','Features.txt'), 'w')
     pk.dump(dicval,bow_val)
     bow_val.close()
+
+
+params=get_params()
+get_features(params)

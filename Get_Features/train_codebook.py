@@ -3,8 +3,8 @@
 #que determinarà el cluster al que es troba el descriptor en la funció get_assignments.
 from sklearn.cluster import MiniBatchKMeans
 
-def train_codebook(params,descriptors,paraules):
-    kMeans = MiniBatchKMeans(paraules) #Revisar aqui la versio de github!! en teoria amb paraules volen dir clusters
+def train_codebook(params,descriptors,clusters):
+    kMeans = MiniBatchKMeans(clusters) #Revisar aqui la versio de github!! en teoria amb paraules volen dir clusters
 
     #funció que calcula els centroids agrupant-los en mini lots. Defineix els centroids amb un entrenament segons els descriptors
     #i el numero de clusters (paraules) que volem.
