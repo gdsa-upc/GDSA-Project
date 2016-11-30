@@ -1,0 +1,6 @@
+En aquesta carpeta podem trobar el primer script del projecte en una jupyter notebook.
+
+Hem fet varis scripts per decidir més endevant quin era el més optim. Hem emperat diferents tècniques per abstreure els 
+descriptors d'una imatge, SIFT i SURF que són difícils d'invocar en python3 ja que les dos estan patentades i es necesita d'una 
+llibreria que no va inclosa en les dependéncies de python, i ORB, que és de software lliure i serà la que finalment 
+utilitzarem.

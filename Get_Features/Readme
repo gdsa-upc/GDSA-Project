@@ -1,0 +1,9 @@
+En aquesta carpeta podem trobar declarades totes les funcions necessries per a poder extreure les caracteristiques de les  imatges de la nostra base de dades. 
+Aquestes seràn per ordre:
+  - local_features_extraction.py
+  - train_codebook.py
+  - Compute_assignments.py
+  - Build_bow.py
+Totes elles seràn invocades en aquest ordre en l'script on definim get_features.py on s'utilitzen totes per crear un arxiu features
+que contindrà un "diccionari" on per cada imatge sabrem quants descriptors hi han per cada paraula "cluster", és a dir serà com un
+historgrama per a cada imatge. 
