@@ -129,47 +129,16 @@
 <p>Utilitzant SURFT podem observar que ens detalla els contorns més pronunciats de la imatge.</p>
 
 <ul>
-<li>SIFT </li>
+<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/PuntsInteresSIFT.ipynb">SIFT</a></li>
 </ul>
-
-<div class="highlight highlight-source-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
-<span class="pl-k">import</span> cv2
-<span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt
-
-
-img <span class="pl-k">=</span> cv2.imread(<span class="pl-s"><span class="pl-pds">'</span>//Users/Marta/Desktop/fotos escriptori/TIGRE.JPG<span class="pl-pds">'</span></span>,<span class="pl-c1">0</span>)
-sift <span class="pl-k">=</span> cv2.SIFT(<span class="pl-c1">4000</span>)
-kp, des <span class="pl-k">=</span> sift.detectAndCompute(img, <span class="pl-c1">None</span>)
-img2 <span class="pl-k">=</span> cv2.drawKeypoints(img, kp, <span class="pl-c1">None</span>, (<span class="pl-c1">255</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>), <span class="pl-c1">4</span>)
-plt.imshow(img2),plt.show()
-<span class="pl-c1">print</span> <span class="pl-c1">len</span>(kp)</pre></div>
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/Imagen%201.png?raw=true" alt=""></p>
 
 <p>En aquest cas com veiem a la imatge anterior, el resultat de l'extracció de característiques és més detallat. Sobretot en els canvis d'intensitat, és a dir, en els contorns.</p>
 
 <ul>
-<li>ORB</li>
+<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/PuntsDInteresORB.ipynb">ORB</a></li>
 </ul>
-
-<div class="highlight highlight-source-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
-<span class="pl-k">import</span> cv2
-<span class="pl-k">from</span> matplotlib <span class="pl-k">import</span> pyplot <span class="pl-k">as</span> plt
-img <span class="pl-k">=</span> cv2.imread(<span class="pl-s"><span class="pl-pds">'</span>/home/marta/Desktop/GDSA/Mercat.JPG<span class="pl-pds">'</span></span>,<span class="pl-c1">0</span>)
-<span class="pl-c">#linea que soluciona un bug de opencv</span>
-cv2.ocl.setUseOpenCL(<span class="pl-c1">False</span>)
-<span class="pl-c"># Initiate STAR detector</span>
-orb <span class="pl-k">=</span> cv2.ORB_create(<span class="pl-c1">200000</span>)
-
-<span class="pl-c"># find the keypoints with ORB</span>
-kp <span class="pl-k">=</span> orb.detect(img,<span class="pl-c1">None</span>)
-
-<span class="pl-c"># compute the descriptors with ORB</span>
-kp, des <span class="pl-k">=</span> orb.compute(img, kp)
-
-<span class="pl-c"># draw only keypoints location,not size and orientation</span>
-img2 <span class="pl-k">=</span> cv2.drawKeypoints(img,kp,<span class="pl-c1">None</span>,<span class="pl-v">color</span><span class="pl-k">=</span>(<span class="pl-c1">255</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>), <span class="pl-v">flags</span><span class="pl-k">=</span><span class="pl-c1">0</span>)
-plt.imshow(img2),plt.show()</pre></div>
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/Marta-C/Mercat.png?raw=true" alt=""></p>
 
@@ -203,6 +172,8 @@ Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, 
 Aquesta funció calcula les assignacións i es retorna un vector:  per cada descriptor quantes assignacions té. </p></li>
 <li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/build_bow.py">Build_bow</a>
 Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </p></li>
+<li><p><a href="">get_features</a>
+Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges d’entrenament/validació, s’extreuen les característiques i es crea el ‘Diccionari’, on i guardarem els descriptors per a cada imatge. Per últim, es guarda el diccionari a Features. </p></li>
 </ul>
 
 <p>3- RANKING</p>
