@@ -10,6 +10,7 @@ def build_bow(assignments,kMeans): #kmeans és la sortida de la funció train_co
     # Construim un histograma sumant +1 per a cada descriptor assignat a un index de cluster.
     for a in assignments:
         bow[a] += 1
+    bow = np.float64(np.reshape(bow, (1,-1)))
     # És important normalitzar amb L2
     bow = preprocessing.normalize(bow)
     return bow

@@ -4,7 +4,7 @@
 from sklearn.cluster import MiniBatchKMeans
 
 def train_codebook(params,descriptors,clusters):
-    kMeans = MiniBatchKMeans(clusters) #Revisar aqui la versio de github!! en teoria amb paraules volen dir clusters
+    kMeans = MiniBatchKMeans(clusters)
 
     #funció que calcula els centroids agrupant-los en mini lots. Defineix els centroids amb un entrenament segons els descriptors
     #i el numero de clusters (paraules) que volem.
