@@ -132,7 +132,7 @@ def get_features(params):
     feat=open(os.path.join(params['root'],params['database'],'val','Features.p'), 'rb')
     p = pk.load(feat)
     feat.close()
-    print (p)
+    print (p) # per observar el resultat
 
-params=get_params()
+params=get_params() #linies per probar que la funció funciona
 get_features(params)
