@@ -73,7 +73,7 @@
 </tr>
 <tr>
 <td>Sessió 4</td>
-<td>(<a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing</a>)</td>
+<td>[Primer prototipus de cercador (<a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -119,22 +119,12 @@
 <p>Amb aquestes dos entorns s'ha genera el primer script. Aquest es basa en l'extracció de punts d'interès d'una imatges. S'ha fet de dos extractors de característiques diferents, SURF, SIFT i ORB. A continuació podeu veure els codis realitzats agafant d'exemple, en els dos primers casos (SURF i SIFT), una imatge d'un tigre. En el cas d'ORB es fa servir una imatge de la nostre base de dades.</p>
 
 <ul>
-<li>SURFT</li>
-</ul>
-
-<div class="highlight highlight-source-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
-<span class="pl-k">import</span> cv2
-<span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt
-
-
-img <span class="pl-k">=</span> cv2.imread(<span class="pl-s"><span class="pl-pds">'</span>//Users/Marta/Desktop/fotos escriptori/TIGRE.JPG<span class="pl-pds">'</span></span>,<span class="pl-c1">0</span>)
-surf <span class="pl-k">=</span> cv2.SURF(<span class="pl-c1">4000</span>)
-kp, des <span class="pl-k">=</span> surf.detectAndCompute(img, <span class="pl-c1">None</span>)
-img2 <span class="pl-k">=</span> cv2.drawKeypoints(img, kp, <span class="pl-c1">None</span>, (<span class="pl-c1">255</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>), <span class="pl-c1">4</span>)
-plt.imshow(img2),plt.show()
-<span class="pl-c1">print</span> <span class="pl-c1">len</span>(kp)</pre></div>
+<li>
+<p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/PuntsInteres_SURF.ipynb">SURFT</a></p>
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1--Keypoints/figure_1.png?raw=true" alt=""></p>
+</li>
+</ul>
 
 <p>Utilitzant SURFT podem observar que ens detalla els contorns més pronunciats de la imatge.</p>
 
