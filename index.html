@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Terrassa’s Buildings by gdsa-upc</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Terrassa’s Buildings</h1>
-      <h2 class="project-tagline">Projecte GDSA</h2>
-      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" class="btn">View on GitHub</a>
-      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <section class="main-content">
-      <p>Aquesta web neix a partir de l'assignatura Gestió i Distribució de Senyals Audiovisuals, on es planteja el desenvolupament d'un projecte que es basa en la cerca visual. Aquest projecte l'hem donat com a nom Terrassa's Buildings i els seus desenvolupadors són:</p>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Terrassa’s Buildings by gdsa-upc</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Terrassa’s Buildings</h1>
+        <h2>Projecte GDSA</h2>
+        <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p>Aquesta web neix a partir de l'assignatura Gestió i Distribució de Senyals Audiovisuals, on es planteja el desenvolupament d'un projecte que es basa en la cerca visual. Aquest projecte l'hem donat com a nom Terrassa's Buildings i els seus desenvolupadors són:</p>
 
 <table>
 <thead>
@@ -187,28 +196,7 @@ plt.imshow(img2),plt.show()</pre></div>
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/gh-pages/images/Captura%20de%20pantalla%202016-11-29%20a%20les%2022.03.21.png?raw=true" alt=""></p>
 
 <p>1-BUILD_DATABASE
-Generar una base de dades.
-Funció:</p>
-
-<div class="highlight highlight-source-python"><pre><span class="pl-c"># -*- coding: utf-8 -*-</span>
-<span class="pl-k">import</span> os 
-
-<span class="pl-k">def</span> <span class="pl-en">build_database</span> (<span class="pl-smi">indir</span>,<span class="pl-smi">outdir</span>): <span class="pl-c">#definim la funció</span>
-    images <span class="pl-k">=</span> os.listdir(indir)  <span class="pl-c">#llegeixo tots els noms dels fitxers del directori d'entrada i els guarda a imatges</span>
-    outfile <span class="pl-k">=</span> <span class="pl-c1">open</span>(outdir<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/ID.txt<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>w<span class="pl-pds">'</span></span>)   <span class="pl-c">#crea el fitxer on escriu els id.</span>
-    <span class="pl-k">for</span> <span class="pl-v">file</span> <span class="pl-k">in</span> images: <span class="pl-c">#recorre tots els id i els escriu al fitxer</span>
-        outfile.write(<span class="pl-v">file</span>[<span class="pl-c1">0</span>:<span class="pl-k">-</span><span class="pl-c1">4</span>]<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span><span class="pl-pds">"</span></span>) 
-        <span class="pl-c1">print</span>(<span class="pl-v">file</span>)
-    outfile.close()<span class="pl-c">#tanca el fitxer</span>
-
-
-ruta1<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/val/images<span class="pl-pds">'</span></span>
-ruta2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/train/images<span class="pl-pds">'</span></span>
-savepath1<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/val<span class="pl-pds">'</span></span>
-savepath2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class="pl-c1">__file__</span>))<span class="pl-k">+</span><span class="pl-s"><span class="pl-pds">'</span>/TerrassaBuildings900/train<span class="pl-pds">'</span></span>
-
-build_database(ruta1,savepath1)
-build_database(ruta2,savepath2)</pre></div>
+Generar una base de dades. Ho hem implementat utilitzant la funció build_database(<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1-Build_Database/BuildDatabase.py">https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1-Build_Database/BuildDatabase.py</a>)</p>
 
 <p>2- FEATURE_EXTRACTION
 Formada per les següents funcions:</p>
@@ -227,13 +215,27 @@ Aquesta funció calcula les assignacións i es retorna un vector:  per cada desc
 Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </p></li>
 </ul>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
+<p>3- RANKING</p>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+<p>4-EVALUATE_RANKING</p>
+        </section>
 
-    </section>
+        <aside id="sidebar">
+          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings"></a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
   
   </body>
