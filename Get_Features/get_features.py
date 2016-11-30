@@ -1,5 +1,5 @@
-# -*- coding: cp1252 -*-
-import os
+# -*- coding: utf-8 -*-
+import os, sys
 import numpy as np
 import pickle as pk
 from local_feature_extraction import local_feature_extraction
@@ -13,7 +13,7 @@ def get_features(params):
 
     #Obrim el fitxer que conte les ID de les imatges d'entrenament
     ID=open(os.path.join(params['root'],params['database'],'train','ID.txt'), 'r')
-    #Extraccio de les caracteristiques de la imatge de la primera linia del ID.txt, la funció readline() llegeix
+    #Extraccio de les caracteristiques de la imatge de la primera linia del ID.txt, la funcio readline() llegeix
     #una sola linea d'un fitxer, aquesta lectura llegeix un caràcter "\n" al final de la linea, menys quan arriva al
     #final del fitxer (l'absencia d'aquest indica el final) però com que no ens interessa tenir el caràcter al final
     #del nom, emperem la subfunció .replace() que substituirà aquest caràcter per un espai en blanc ' '.
@@ -57,7 +57,7 @@ def get_features(params):
     ID.close()
 
     #Guardem el diccionari amb el BoW per cada imatge d'entrenament en l'arxiu "Features.txt".
-    bow_train = open (os.path.join(params['root'],params['database'],'train','Features.txt'), 'w')
+    bow_train = open (os.path.join(params['root'],params['database'],'train','Features.txt'), 'wb')
     #la funció dump() permet guardar la variable dic_train en l'arxiu features.txt indicat per la variable bow_train.
     pk.dump(dic_train,bow_train)
     bow_train.close() #Tanquem el fitxer features.txt
@@ -99,7 +99,7 @@ def get_features(params):
     ID.close()
 
     #Guardem el diccionari amb el BoW de les imatges de validació en l'arxiu "Features.txt"
-    bow_val = open (os.path.join(params['root'],params['database'],'val','Features.txt'), 'w')
+    bow_val = open (os.path.join(params['root'],params['database'],'val','Features.txt'), 'wb')
     pk.dump(dicval,bow_val)
     bow_val.close()
 

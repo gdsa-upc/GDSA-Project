@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import numpy as np
 import cv2
@@ -15,7 +16,7 @@ def local_feature_extraction(params,image):
         cv2.ocl.setUseOpenCL(False)
 
         # Creem l'objecte ORB que tindrà 200k keypoints. (Perametre que podem modificar per no saturar el programa)
-        orb = cv2.ORB_create(200000)
+        orb = cv2.ORB_create(2000)
 
         # Detectem els keypoints:
         kp = orb.detect(img1,None)
