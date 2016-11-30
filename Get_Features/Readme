@@ -1,5 +1,4 @@
-En aquesta carpeta podem trobar declarades totes les funcions necessries per a poder extreure les caracteristiques de les 
-imatges de la nostra base de dades. 
+En aquesta carpeta podem trobar declarades totes les funcions necessries per a poder extreure les caracteristiques de les  imatges de la nostra base de dades. 
 Aquestes seràn per ordre:
   - local_features_extraction.py
   - train_codebook.py
