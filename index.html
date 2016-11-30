@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Terrassa’s Buildings by gdsa-upc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Terrassa’s Buildings by gdsa-upc</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Terrassa’s Buildings</h1>
-        <h2>Projecte GDSA</h2>
-        <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Terrassa’s Buildings</h1>
+      <h2 class="project-tagline">Projecte GDSA</h2>
+      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings" class="btn">View on GitHub</a>
+      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <p>Aquesta web neix a partir de l'assignatura Gestió i Distribució de Senyals Audiovisuals, on es planteja el desenvolupament d'un projecte que es basa en la cerca visual. Aquest projecte l'hem donat com a nom Terrassa's Buildings i els seus desenvolupadors són:</p>
+    <section class="main-content">
+      <p>Aquesta web neix a partir de l'assignatura Gestió i Distribució de Senyals Audiovisuals, on es planteja el desenvolupament d'un projecte que es basa en la cerca visual. Aquest projecte l'hem donat com a nom Terrassa's Buildings i els seus desenvolupadors són:</p>
 
 <table>
 <thead>
@@ -63,17 +54,17 @@
 <thead>
 <tr>
 <th>Sessions</th>
-<th>informe</th>
+<th>LINK</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Sessió 3</td>
-<td><a href="https://docs.google.com/presentation/d/10qN_5L64CRrDN-KxAChikhTSHKhgo5Zdgb-cuL4wFAA/edit?usp=sharing">Extracció de característiques</a></td>
+<td>(<a href="https://docs.google.com/presentation/d/10qN_5L64CRrDN-KxAChikhTSHKhgo5Zdgb-cuL4wFAA/edit?usp=sharing">https://docs.google.com/presentation/d/10qN_5L64CRrDN-KxAChikhTSHKhgo5Zdgb-cuL4wFAA/edit?usp=sharing</a>)</td>
 </tr>
 <tr>
 <td>Sessió 4</td>
-<td><a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">Sistema aleatori</a></td>
+<td>(<a href="https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing">https://docs.google.com/presentation/d/1BYy3HgLG6q_1lNq15vN7Gp8xHzMo9Y2DdIURvjgpsQ4/edit?usp=sharing</a>)</td>
 </tr>
 </tbody>
 </table>
@@ -195,7 +186,9 @@ plt.imshow(img2),plt.show()</pre></div>
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/gh-pages/images/Captura%20de%20pantalla%202016-11-29%20a%20les%2022.03.21.png?raw=true" alt=""></p>
 
-<p>En el primer bloc, la intenció es genera una base de dades. La funció s'anomena build_database i el resultat és el que es mostra a continuació:</p>
+<p>1-BUILD_DATABASE
+Generar una base de dades.
+Funció:</p>
 
 <div class="highlight highlight-source-python"><pre><span class="pl-c"># -*- coding: utf-8 -*-</span>
 <span class="pl-k">import</span> os 
@@ -217,33 +210,30 @@ savepath2<span class="pl-k">=</span>os.path.dirname(os.path.abspath(<span class=
 build_database(ruta1,savepath1)
 build_database(ruta2,savepath2)</pre></div>
 
-<p>Un cop ja tenim això, el següent pas és fer el Feature Extraction. Aquesta part està formada pels següents funcions:</p>
+<p>2- FEATURE_EXTRACTION
+Formada per les següents funcions:</p>
 
 <ul>
-<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/Marta-B/sessio-4/Feature-Extraction/get_local_features.py">Get_Local_Featrures</a></li>
-<li>
-<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Train_codebook.py">Train_codebook</a> </li>
-<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Get_assignments.py">Get_assignments</a></li>
-<li><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/build_bow.py">Build_bow</a></li>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tree/master/2--Get_Features-4/get_params.py"><strong>get_params</strong></a>
+Utilitzarem aquesta funció per a definir tots els peràmetres que farem servir en les pròximes funcions amb la idea de tenir un codi més ordenat. Definirem aqui des del path cap a la base de dades fins a la mida de descriptor, mida d’imatges, etc.</p></li>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/Marta-B/sessio-4/Feature-Extraction/get_local_features.py"><strong>local_feature_extraction</strong></a>
+Obtenim els descriptors amb la funció local_feature_extraction(params, image).
+Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la imatge que es llegeix de la llibreria és .jpg o .JPG, ja que, de no fer-ho obtenim un error Nontype. A continuació,  la funció resize que apliquem a les imatges per a fer-les més petites amb la idea de no saturar la memoria al compilar.</p></li>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Train_codebook.py"><strong>train_codebook</strong></a> 
+Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, és molt més ràpid que altres aplicacions per defecte. Ens cal limitar el nombre de features o d’imatges. </p></li>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Get_assignments.py"><strong>get_assignments</strong></a>
+Aquesta funció calcula les assignacións i es retorna un vector:  per cada descriptor quantes assignacions té. </p></li>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/build_bow.py">Build_bow</a>
+Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </p></li>
 </ul>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings"></a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
   
   </body>
