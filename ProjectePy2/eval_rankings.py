@@ -238,7 +238,7 @@ if __name__ == "__main__":
     params = get_params()
 
     ap_list, dict_ = eval_rankings(params)
-    print 'Acuracy:'
+    print 'Accuracy:'
     print 'Mean:',np.mean(ap_list)
 
     for id in dict_.keys():
