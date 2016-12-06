@@ -134,8 +134,8 @@ def image_local_features(image):
         #linea que soluciona un bug de opencv a python3
         #cv2.ocl.setUseOpenCL(False)
 
-        # Creem l'objecte ORB que tindrà 20k keypoints. (Perametre que podem modificar per no saturar el programa)
-        orb = cv2.ORB(20000)
+        # Creem l'objecte ORB que tindrà 200k keypoints. (Perametre que podem modificar per no saturar el programa)
+        orb = cv2.ORB(200000)
 
         # Detectem els keypoints:
         kp = orb.detect(image,None)

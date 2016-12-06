@@ -2,13 +2,6 @@ import os, sys
 import pandas as pd
 import numpy as np
 from get_params import get_params
-
-# We need to add the source code path to the python path if we want to call modules such as 'utils'
-params = get_params()
-sys.path.insert(0,params['src'])
-
-import utils.kaggle_scripts as kaggle_scripts
-
 import matplotlib.pyplot as plt
 import cv2
 
@@ -141,6 +134,29 @@ def load_ranking(params,query_id, annotation_val):
 
     return query_class, ranking
 
+#ha sortit del kaggle script
+def save_ranking_file(file_to_save,image_id,ranking):
+
+    '''
+    :param file_to_save: name of the file to be saved
+    :param image_id: name of the query image
+    :param ranking: ranking for the image image_id
+    :return: the updated state of the file to be saved
+    '''
+
+    # Write query name
+    file_to_save.write(image_id.split('.')[0] + ',')
+
+    # Convert elements to string and ranking to list
+    ranking = np.array(ranking).astype('str').tolist()
+
+    # Write space separated ranking
+    for item in ranking:
+        file_to_save.write(item[0] + " ")
+
+    file_to_save.write('\n')
+
+    return file_to_save
 
 def eval_rankings(params):
 
@@ -173,10 +189,10 @@ def eval_rankings(params):
 
         # We do not evaluate the queries in the unknown class !
         if not query_class == "desconegut":
-
+            #single_eval(params,val_id)  # activant aquesta linea fem un display per veure quines de les 10 primeres imatges s'han predit correctament i quines no
             if params['save_for_kaggle']:
 
-                file_to_save = kaggle_scripts.save_ranking_file(file_to_save,val_id,ranking)
+                file_to_save = save_ranking_file(file_to_save,val_id,ranking)
 
             # Get the hit & miss list
             relnotrel = get_hitandmiss(ranking,query_class,annotation_train)
@@ -190,6 +206,7 @@ def eval_rankings(params):
 
             # Store it
             ap_list.append(ap)
+
 
     if params['save_for_kaggle']:
 
@@ -221,10 +238,10 @@ if __name__ == "__main__":
     params = get_params()
 
     ap_list, dict_ = eval_rankings(params)
-
-    print np.mean(ap_list)
+    print 'Acuracy:'
+    print 'Mean:',np.mean(ap_list)
 
     for id in dict_.keys():
         if not id == 'desconegut':
             # We divide by 10 because it's the number of images per class in the validation set.
-            print id, dict_[id]/10
+            print id+':', dict_[id]/10
