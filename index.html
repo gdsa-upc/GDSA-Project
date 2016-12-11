@@ -160,7 +160,7 @@ Formada per les següents funcions:</p>
 <ul>
 <li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/2--Get_Features/get_params.py"><strong>get_params</strong></a>
 Utilitzarem aquesta funció per a definir tots els peràmetres que farem servir en les pròximes funcions amb la idea de tenir un codi més ordenat. Definirem aqui des del path cap a la base de dades fins a la mida de descriptor, mida d’imatges, etc.</p></li>
-<li><p>[<strong>image_local_features</strong>]
+<li><p><strong>image_local_features</strong>
 Obtenim els descriptors amb la funció local_feature_extraction(params, image).
 Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la imatge que es llegeix de la llibreria és .jpg o .JPG, ja que, de no fer-ho obtenim un error Nontype. A continuació,  la funció resize que apliquem a les imatges per a fer-les més petites amb la idea de no saturar la memoria al compilar.</p></li>
 </ul>
@@ -187,7 +187,8 @@ Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la i
         <span class="pl-k">return</span> des</pre></div>
 
 <ul>
-<li>[<strong>train_codebook</strong>]
+<li>
+<strong>train_codebook</strong>
 Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, és molt més ràpid que altres aplicacions per defecte. Ens cal limitar el nombre de features o d’imatges. </li>
 </ul>
 
@@ -220,7 +221,7 @@ Aquesta funció calcula les assignacións i es retorna un vector:  per cada desc
     <span class="pl-k">return</span> assignments</pre></div>
 
 <ul>
-<li>[Bow]
+<li>Bow
 Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </li>
 </ul>
 
