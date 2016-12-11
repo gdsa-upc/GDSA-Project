@@ -256,9 +256,14 @@ Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges
 <ul>
 <li><p>Display: En aquesta part es llegeix les imatges de la base de dades i es posa contorns blaus per la consulta. Més tard només mostrem els primers 15 elements del ranking. On els llegim i comparem. Si són semblants, posem el contorn verd i si són diferents, posem el contorn de color vermell.</p></li>
 <li><p>Read_annotation(): Llegim les anotacions del directori train i val.</p></li>
-<li><p>Get_hitandmiss</p></li>
-<li><p>AveragePrecision</p></li>
-<li><p>Load_ranking</p></li>
+<li><p>Get_hitandmiss: Inicilitzem la llista de salts o encerts. Per cada id de les imatges del ranking, obtenim la classe de l'anotació d'entrenament. En el cas que coincideixi amb la classe de consulta, aleshores això vol dir que és correcta. En el cas contrari, vol dir que és fals.</p></li>
+<li><p>AveragePrecision: En aquesta funció inicialitzem les variables accu (suma de precisions i numRel (número de instants correctes). Aleshores omplim aquestes variable amb un for per tots els elements de la llista de salts o encerts. Un cop s'ha llegit tots els elements de la llista, es fa la següent divisió:</p></li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">return</span> (accu<span class="pl-k">/</span>np.sum(relist))</pre></div>
+
+<ul>
+<li><p>Load_ranking: Carga i retorna el ranking del txt. També retorna la classe de la imatge de consulta</p></li>
 <li><p>Save_ranking_file</p></li>
 <li><p>Eval_rankings</p></li>
 <li><p>Single_eval: </p></li>
