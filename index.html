@@ -158,9 +158,9 @@ Generar una base de dades. Ho hem implementat utilitzant la funció build_databa
 Formada per les següents funcions:</p>
 
 <ul>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/2--Get_Features/get_params.py"><strong>get_params</strong></a>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/2--Get_Features/get_params.py">get_params</a>
 Utilitzarem aquesta funció per a definir tots els peràmetres que farem servir en les pròximes funcions amb la idea de tenir un codi més ordenat. Definirem aqui des del path cap a la base de dades fins a la mida de descriptor, mida d’imatges, etc.</p></li>
-<li><p><strong>image_local_features</strong>
+<li><p>image_local_features
 Obtenim els descriptors amb la funció local_feature_extraction(params, image).
 Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la imatge que es llegeix de la llibreria és .jpg o .JPG, ja que, de no fer-ho obtenim un error Nontype. A continuació,  la funció resize que apliquem a les imatges per a fer-les més petites amb la idea de no saturar la memoria al compilar.</p></li>
 </ul>
@@ -187,8 +187,7 @@ Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la i
         <span class="pl-k">return</span> des</pre></div>
 
 <ul>
-<li>
-<strong>train_codebook</strong>
+<li>train_codebook
 Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, és molt més ràpid que altres aplicacions per defecte. Ens cal limitar el nombre de features o d’imatges. </li>
 </ul>
 
@@ -210,7 +209,7 @@ Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, 
     <span class="pl-k">return</span> km</pre></div>
 
 <ul>
-<li>[<strong>get_assignments</strong>]
+<li>get_assignments
 Aquesta funció calcula les assignacións i es retorna un vector:  per cada descriptor quantes assignacions té. </li>
 </ul>
 
