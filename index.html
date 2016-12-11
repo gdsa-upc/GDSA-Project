@@ -151,26 +151,98 @@
 
 <p><img src="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/gh-pages/images/Captura%20de%20pantalla%202016-11-29%20a%20les%2022.03.21.png?raw=true" alt=""></p>
 
-<p>1-BUILD_DATABASE
-Generar una base de dades. Ho hem implementat utilitzant la funció build_database(<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1-Build_Database/BuildDatabase.py">https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1-Build_Database/BuildDatabase.py</a>)</p>
+<p>1-<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/1-Build_Database/build_database.py">Build_Database</a>
+Generar una base de dades. Ho hem implementat utilitzant la funció build_database.</p>
 
 <p>2- FEATURE_EXTRACTION
 Formada per les següents funcions:</p>
 
 <ul>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/tree/master/2--Get_Features-4/get_params.py"><strong>get_params</strong></a>
+<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/2--Get_Features/get_params.py"><strong>get_params</strong></a>
 Utilitzarem aquesta funció per a definir tots els peràmetres que farem servir en les pròximes funcions amb la idea de tenir un codi més ordenat. Definirem aqui des del path cap a la base de dades fins a la mida de descriptor, mida d’imatges, etc.</p></li>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/Marta-B/sessio-4/Feature-Extraction/get_local_features.py"><strong>local_feature_extraction</strong></a>
+<li><p>[<strong>image_local_features</strong>]
 Obtenim els descriptors amb la funció local_feature_extraction(params, image).
 Primer s’extreuen utilitzant el tipus de descriptor ORB pels casos en que la imatge que es llegeix de la llibreria és .jpg o .JPG, ja que, de no fer-ho obtenim un error Nontype. A continuació,  la funció resize que apliquem a les imatges per a fer-les més petites amb la idea de no saturar la memoria al compilar.</p></li>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Train_codebook.py"><strong>train_codebook</strong></a> 
-Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, és molt més ràpid que altres aplicacions per defecte. Ens cal limitar el nombre de features o d’imatges. </p></li>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/Get_assignments.py"><strong>get_assignments</strong></a>
-Aquesta funció calcula les assignacións i es retorna un vector:  per cada descriptor quantes assignacions té. </p></li>
-<li><p><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/David/sessi--4/build_bow.py">Build_bow</a>
-Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </p></li>
-<li><p><a href="">get_features</a>
-Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges d’entrenament/validació, s’extreuen les característiques i es crea el ‘Diccionari’, on i guardarem els descriptors per a cada imatge. Per últim, es guarda el diccionari a Features. </p></li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">image_local_features</span>(<span class="pl-smi">image</span>):
+    <span class="pl-c">#llegim la imatge:</span>
+    <span class="pl-c">#img = cv2.imread(image)</span>
+    <span class="pl-c">#Cambiem la mida de la imatge:</span>
+    <span class="pl-k">if</span> <span class="pl-k">not</span> image <span class="pl-k">is</span> <span class="pl-c1">None</span>:
+
+        <span class="pl-c">#linea que soluciona un bug de opencv a python3</span>
+        <span class="pl-c">#cv2.ocl.setUseOpenCL(False)</span>
+
+        <span class="pl-c"># Creem l'objecte ORB que tindrà 200k keypoints. (Perametre que podem modificar per no saturar el programa)</span>
+        orb <span class="pl-k">=</span> cv2.ORB(<span class="pl-c1">200000</span>)
+
+        <span class="pl-c"># Detectem els keypoints:</span>
+        kp <span class="pl-k">=</span> orb.detect(image,<span class="pl-c1">None</span>)
+
+        <span class="pl-c"># Calculem els descriptors amb els keypoints trobats.</span>
+        kp, des <span class="pl-k">=</span> orb.compute(image, kp)
+
+        <span class="pl-c"># la sortida de la funció serà els descriptors</span>
+        <span class="pl-k">return</span> des</pre></div>
+
+<ul>
+<li>[<strong>train_codebook</strong>]
+Per definir aquesta funció fem servir MiniBatchKMeans. Això és així ja que, és molt més ràpid que altres aplicacions per defecte. Ens cal limitar el nombre de features o d’imatges. </li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">train_codebook</span>(<span class="pl-smi">params</span>,<span class="pl-smi">X</span>):
+
+    <span class="pl-c"># Init kmeans instance</span>
+    km <span class="pl-k">=</span> MiniBatchKMeans(params[<span class="pl-s"><span class="pl-pds">'</span>descriptor_size<span class="pl-pds">'</span></span>])
+
+    <span class="pl-c"># Training the model with our descriptors</span>
+    km.fit(<span class="pl-c1">X</span>)
+
+    <span class="pl-c"># Save to disk</span>
+    pickle.dump(km,<span class="pl-c1">open</span>(os.path.join(params[<span class="pl-s"><span class="pl-pds">'</span>root<span class="pl-pds">'</span></span>],params[<span class="pl-s"><span class="pl-pds">'</span>root_save<span class="pl-pds">'</span></span>],
+                                     params[<span class="pl-s"><span class="pl-pds">'</span>codebooks_dir<span class="pl-pds">'</span></span>],<span class="pl-s"><span class="pl-pds">'</span>codebook_<span class="pl-pds">'</span></span>
+                                     <span class="pl-k">+</span> <span class="pl-c1">str</span>(params[<span class="pl-s"><span class="pl-pds">'</span>descriptor_size<span class="pl-pds">'</span></span>]) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span>
+                                     <span class="pl-k">+</span> params[<span class="pl-s"><span class="pl-pds">'</span>descriptor_type<span class="pl-pds">'</span></span>]
+                                     <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>_<span class="pl-pds">"</span></span> <span class="pl-k">+</span> params[<span class="pl-s"><span class="pl-pds">'</span>keypoint_type<span class="pl-pds">'</span></span>] <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>.cb<span class="pl-pds">'</span></span>),<span class="pl-s"><span class="pl-pds">'</span>wb<span class="pl-pds">'</span></span>))
+
+    <span class="pl-k">return</span> km</pre></div>
+
+<ul>
+<li>[<strong>get_assignments</strong>]
+Aquesta funció calcula les assignacións i es retorna un vector:  per cada descriptor quantes assignacions té. </li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">get_assignments</span>(<span class="pl-smi">km</span>,<span class="pl-smi">descriptors</span>):
+
+    assignments <span class="pl-k">=</span> km.predict(descriptors)
+
+    <span class="pl-k">return</span> assignments</pre></div>
+
+<ul>
+<li>[Bow]
+Aquesta funció crea un descriptor del mateix tamany que el número de clusters tot a zeros. Per cada entrada a l’assigment, es suma 1 al índex que toca a l’histograma. Per finalitzar, el normalitzem amb L2. </li>
+</ul>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">bow</span>(<span class="pl-smi">assignments</span>,<span class="pl-smi">km</span>):
+
+    <span class="pl-c"># Initialize empty descriptor of the same length as the number of clusters</span>
+    descriptor <span class="pl-k">=</span> np.zeros(np.shape(km.cluster_centers_)[<span class="pl-c1">0</span>])
+
+    <span class="pl-c"># Build vector of repetitions</span>
+    <span class="pl-k">for</span> a <span class="pl-k">in</span> assignments:
+
+        descriptor[a] <span class="pl-k">+=</span> <span class="pl-c1">1</span>
+
+    <span class="pl-c"># L2 normalize</span>
+    descriptor <span class="pl-k">=</span> normalize(descriptor)
+
+    <span class="pl-k">return</span> descriptor</pre></div>
+
+<ul>
+<li>
+<a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/2--Get_Features/get_features.py">Get_features</a>
+Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges d’entrenament/validació, s’extreuen les característiques i es crea el ‘Diccionari’, on i guardarem els descriptors per a cada imatge. Per últim, es guarda el diccionari a Features. </li>
 </ul>
 
 <p>3- RANKING</p>
