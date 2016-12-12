@@ -1,7 +1,6 @@
 # -*- coding: cp1252 -*-
 from get_params import get_params
 import sys
-#from rootsift import RootSIFT
 import os, time
 import numpy as np
 import pickle
@@ -9,6 +8,9 @@ import cv2
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.preprocessing import normalize, StandardScaler
 from sklearn.decomposition import PCA
+from sklearn.neighbors import kneighbors_graph
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.cluster import KMeans
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -41,7 +43,12 @@ def get_features(params,pca=None,scaler=None):
         im = resize_image(params,im)
 
         # Extract local features
-        feats = image_local_features(im)
+        f_orb = image_local_features(im)
+        f_sift=sift_features(im)
+
+        # posem f_i que sigui igual que la dimensió f_o
+        f_sift.resize(f_orb.shape)
+        feats=np.concatenate((f_sift,f_orb))
 
         if feats is not None:
 
@@ -66,9 +73,16 @@ def get_features(params,pca=None,scaler=None):
             # Empty features
             feats = np.zeros(params['descriptor_size'])
 
+        '''
+        print f_sift[1]
+        print f_orb[1]
+        print len(f_orb)
+        print len(f_sift)
+        '''
+        #print len(feats)
+
         # Add entry to dictionary
         features[image_name] = feats
-
 
     # Save dictionary to disk with unique name
     save_file = os.path.join(params['root'],params['root_save'],params['feats_dir'],
@@ -96,7 +110,7 @@ def resize_image(params,im):
 class RootSIFT:
     def __init__(self):
     	# initialize the SIFT feature extractor
-    	self.extractor = cv2.DescriptorExtractor_create("SIFT")
+    	self.extractor = cv2.DescriptorExtractor_create("ORB")
 
     def compute(self, image, kps, eps=1e-7):
     	# compute SIFT descriptors
@@ -112,18 +126,16 @@ class RootSIFT:
     	descs = np.sqrt(descs)
 
         return kps, descs
-
-def image_local_features(im,detector,extractor):
-
-
-    #Extract local features for given image
-
-
-    positions = detector.detect(im,None)
-    positions, descriptors = extractor.compute(im,positions)
-
-    return descriptors
 '''
+def sift_features(image):
+    if not image is None:
+        #Extract sift descriptors
+        sift = cv2.SIFT(2000)
+        kp_sift = sift.detect(image,None)
+        kp_sift, des_sift = sift.compute(image, kp_sift)
+        #print len(kp_sift)
+        #print len(des_sift)
+        return des_sift
 
 def image_local_features(image):
     #llegim la imatge:
@@ -135,15 +147,14 @@ def image_local_features(image):
         #cv2.ocl.setUseOpenCL(False)
 
         # Creem l'objecte ORB que tindrà 200k keypoints. (Perametre que podem modificar per no saturar el programa)
-        orb = cv2.ORB(200000)
+        orb = cv2.ORB(2000)
 
         # Detectem els keypoints:
-        kp = orb.detect(image,None)
+        kp_o = orb.detect(image,None)
 
         # Calculem els descriptors amb els keypoints trobats.
-        kp, des = orb.compute(image, kp)
+        kp, des= orb.compute(image, kp_o)
 
-        # la sortida de la funció serà els descriptors
         return des
 
 """def init_detect_extract(params):
@@ -190,7 +201,12 @@ def stack_features(params):
         im = resize_image(params,im)
 
         #feats = image_local_features(im,detector,extractor)
-        feats=image_local_features(im)
+        f_o=image_local_features(im)
+        f_i=sift_features(im)
+        # posem f_i que sigui igual que la dimensió f_o
+        f_i.resize(f_o.shape)
+        feats=np.concatenate((f_i,f_o))
+
         # Stack all local descriptors together
 
         if feats is not None:
@@ -204,7 +220,7 @@ def stack_features(params):
         X = normalize(X)
 
     if params['whiten']:
-
+                            #n_components=128
         pca = PCA(whiten=True)
         pca.fit_transform(X)
 
@@ -224,20 +240,28 @@ def stack_features(params):
 
 def train_codebook(params,X):
 
-    # Init kmeans instance
-    km = MiniBatchKMeans(params['descriptor_size'])
+        # Init kmeans instance
+        km = MiniBatchKMeans(params['descriptor_size'])
+
 
     # Training the model with our descriptors
-    km.fit(X)
 
-    # Save to disk
-    pickle.dump(km,open(os.path.join(params['root'],params['root_save'],
+    # normalize dataset for easier parameter selection
+        #X = StandardScaler().fit_transform(X)
+        #kg = kneighbors_graph(X,n_neighbors=params['descriptor_size'], mode='distance',include_self=False)
+        # make kg symmetric
+        #kg = 0.5 * (kg + kg.T)
+
+        #km = AgglomerativeClustering(connectivity=kg,linkage='ward',n_clusters=params['descriptor_size'])
+        km.fit(X)
+        # Save to disk
+        pickle.dump(km,open(os.path.join(params['root'],params['root_save'],
                                      params['codebooks_dir'],'codebook_'
                                      + str(params['descriptor_size']) + "_"
                                      + params['descriptor_type']
                                      + "_" + params['keypoint_type'] + '.cb'),'wb'))
 
-    return km
+        return km
 
 def get_assignments(km,descriptors):
 
