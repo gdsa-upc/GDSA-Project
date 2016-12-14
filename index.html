@@ -275,6 +275,42 @@ Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges
 
 <p>En aquesta sessió del projecte, la intenció és finalitzar les funcions feature_extraction, ranking i evaluation. Però la part més important de la sessió és la Improvements on the baseline. </p>
 
+<p>La millora que hem fet ho hem aconseguit mitjançant la combinació de SIFT i ORB. Primer de tot hem definit la funció Sift_features() dintre de get_features:</p>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">sift_features</span>(<span class="pl-smi">image</span>):
+    <span class="pl-k">if</span> <span class="pl-k">not</span> image <span class="pl-k">is</span> <span class="pl-c1">None</span>:
+        <span class="pl-c">#Extract sift descriptors</span>
+        sift <span class="pl-k">=</span> cv2.SIFT(<span class="pl-c1">200000</span>)
+        kp_sift <span class="pl-k">=</span> sift.detect(image,<span class="pl-c1">None</span>)
+        kp_sift, des_sift <span class="pl-k">=</span> sift.compute(image, kp_sift)
+        <span class="pl-c">#print len(kp_sift)</span>
+        <span class="pl-c">#print len(des_sift)</span>
+        <span class="pl-k">return</span> des_sift</pre></div>
+
+<p>I dintre de image_local_features(image) hem aplicat ORB.</p>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">image_local_features</span>(<span class="pl-smi">image</span>):
+    <span class="pl-c">#llegim la imatge:</span>
+    <span class="pl-c">#img = cv2.imread(image)</span>
+    <span class="pl-c">#Cambiem la mida de la imatge:</span>
+    <span class="pl-k">if</span> <span class="pl-k">not</span> image <span class="pl-k">is</span> <span class="pl-c1">None</span>:
+
+        <span class="pl-c">#linea que soluciona un bug de opencv a python3</span>
+        <span class="pl-c">#cv2.ocl.setUseOpenCL(False)</span>
+
+        <span class="pl-c"># Creem l'objecte ORB que tindrà 200k keypoints. (Perametre que podem modificar per no saturar el programa)</span>
+        orb <span class="pl-k">=</span> cv2.ORB(<span class="pl-c1">200000</span>)
+
+        <span class="pl-c"># Detectem els keypoints:</span>
+        kp_o <span class="pl-k">=</span> orb.detect(image,<span class="pl-c1">None</span>)
+
+        <span class="pl-c"># Calculem els descriptors amb els keypoints trobats.</span>
+        kp, des<span class="pl-k">=</span> orb.compute(image, kp_o)
+
+        <span class="pl-k">return</span> des</pre></div>
+
+<p>A continuació podeu veure el resultat. E<a href="https://docs.google.com/presentation/d/1WQZ6u9ZcucOMAc_W2__FvCq-HeTcyD7znJaK6clQooo/edit?usp=sharing">Enllaç</a></p>
+
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
 
