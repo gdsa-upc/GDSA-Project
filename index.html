@@ -273,9 +273,9 @@ Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges
 <a id="sessió-5" class="anchor" href="#sessi%C3%B3-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://docs.google.com/presentation/d/1WQZ6u9ZcucOMAc_W2__FvCq-HeTcyD7znJaK6clQooo/edit?usp=sharing">Sessió 5</a>
 </h1>
 
-<p>En aquesta sessió del projecte, la intenció és finalitzar les funcions feature_extraction, ranking i evaluation. Però la part més important de la sessió és la Improvements on the baseline. </p>
+<p>En aquesta sessió del projecte, la intenció és finalitzar les funcions feature_extraction, ranking i evaluation. Però la part més important de la sessió és la Improvements. Hem intentat diferents millores:</p>
 
-<p>La millora que hem fet ho hem aconseguit mitjançant la combinació de SIFT i ORB. Primer de tot hem definit la funció Sift_features() dintre de get_features:</p>
+<p>*Combinació de SIFT i ORB: Aquesta millora l'hem intentat fer mitjançant la concatenació de SIFT i ORB. Primer de tot hem definit la funció Sift_features() dintre de get_features:</p>
 
 <div class="highlight highlight-source-python"><pre><span class="pl-k">def</span> <span class="pl-en">sift_features</span>(<span class="pl-smi">image</span>):
     <span class="pl-k">if</span> <span class="pl-k">not</span> image <span class="pl-k">is</span> <span class="pl-c1">None</span>:
@@ -309,7 +309,15 @@ Aquesta es la funció general, s’obra el fitxer on tenim els Id de les imatges
 
         <span class="pl-k">return</span> des</pre></div>
 
-<p>A continuació podeu veure el resultat. <a href="https://docs.google.com/presentation/d/1WQZ6u9ZcucOMAc_W2__FvCq-HeTcyD7znJaK6clQooo/edit?usp=sharing">Enllaç</a></p>
+<p>La mitjana d'encert ha estat de 13%. Això vol dir que la millora és molt limitada i hem de buscar alternatives. A continuació podeu veure el resultat. <a href="https://docs.google.com/presentation/d/1WQZ6u9ZcucOMAc_W2__FvCq-HeTcyD7znJaK6clQooo/edit?usp=sharing">Enllaç</a></p>
+
+<p>*RootSift:Per aquesta millora hem definit la classe RootSift dintre de get_features. La utlització de RootSift ha estat molt positiva ja que la mitjana d'encert ha estat de 24%. En l'enllaç següent podeu veure el resulatat: <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/5-Millores/get_featuresRootSIFT.py">Github</a></p>
+
+<p>*RootSIFT combinat amb ORB: El resultat d'aquesta prova no ha estat satisfactori ja que la mitjana d'encert ha estat de 12%.</p>
+
+<p>*Hough Transform: Una de les millores que hem probat és realitzar una Hough Transform per obtenir informació espaial de l'imatge, la idea principal era reduir els descriptors obtinguts amb SIFT, ORB o RootSIFT eliminant els "falsos resultats" que serien aquells que no pertanyarien a les linies obtingudes amb aquesta transformació. Hem aconseguit probar-ho fora el projecte amb una imatge d'exemple però no hem sigut capaços d'implementar-ho al projecte.  Al següent enllaç pots trobar una Jupyter Notebook amb el resultat de la funció que hem aconseguit implementar. <a href="https://github.com/gdsa-upc/Terrassa-s-Buildings/blob/master/JupyterNotebooks/MilloraHoughTransform.ipynb">Enllaç</a></p>
+
+<p>Per les millores provades anteriorment comparant els resultats obtinguts queda clar que l’obtingut amb RootSIFT ha sigut el millor ja que hem obtingut una mitjana del 24% d’encerts comparat amb el 13% o 12% dels altres mètodes provats. </p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/gdsa-upc/Terrassa-s-Buildings">Terrassa’s Buildings</a> is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a>.</span>
