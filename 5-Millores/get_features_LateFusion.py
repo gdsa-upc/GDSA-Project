@@ -230,13 +230,13 @@ def stack_features(params):
         # posem f_i que sigui igual que la dimensió f_o
         #f_i.resize(f_o.shape)
         #feats=np.concatenate((f_i,f_o))
-        print "hello"
+        
         detector,extractor=init_detect_extract(params)
         feats=image_local_features_root(im,detector,extractor)
         #f_o.resize(f_r.shape)
         #feats=np.concatenate((f_r,f_o))
         # Stack all local descriptors together
-        print "bye"
+
         if feats1 is not None:
             if len(Y) == 0:
                 Y = feats1
